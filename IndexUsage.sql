@@ -11,3 +11,7 @@ FROM sys.dm_db_index_usage_stats ixs
 --WHERE OBJECTPROPERTY(ixs.object_id, 'Factura')  = 1
 --      AND ixs.database_id = DB_ID();
 WHERE  ixs.database_id = DB_ID();
+
+
+select * from sys.indexes
+select * FROM sys.dm_db_index_usage_stats
