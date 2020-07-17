@@ -153,7 +153,7 @@ and a.CEDULA = '0201008406'
 
 
 select a.CEDULA, a.NOMBRES_COMPLETO 
-into musicallyapp..GEN_PERSONA_23
+--into musicallyapp..GEN_PERSONA_23
 from musicallyapp..GEN_PERSONA a
 inner join
 (
@@ -326,4 +326,48 @@ select * from Productos
 select * from ProductosExternos
 
 
-----
+----OR EN LA CLAUSULA JOIN O WHERE EN VARIAS COLUMNAS
+
+select
+comprobante.ClienteIdentificacion as Identificacion,
+comprobante.ClienteNombre as Cliente,
+SUBSTRING(comprobante.NumeroFactura,1,3) as Establecimiento,
+SUBSTRING(comprobante.NumeroFactura,5,3) as PuntoEmision,
+SUBSTRING(comprobante.NumeroFactura,9,len(comprobante.NumeroFactura)) as SecuencialComprobante,
+CONVERT(date,comprobante.FechaAutorizacion) as FechaAutorizacion,
+YEAR(comprobante.FechaAutorizacion) as AnioAutorizacion,
+Month(comprobante.FechaAutorizacion) as MesAutorizacion,
+comprobante.NumeroFactura as NumeroComprobante,
+'VENTAS' as TipoComprobante
+from musicallyapp..ComprobanteFactura comprobante
+inner join musicallyapp..Factura factura on factura.NumeroFactura = comprobante.NumeroFactura 
+or Factura.IdFactura = comprobante.IdFactura
+
+---
+---0908560212
+
+
+
+select * from musicallyapp..ComprobanteFactura comprobante 
+where ClienteIdentificacion = '0908560212' or NumeroFactura = '001-004-000001948'
+
+--eVITAR BUSQUEDAS COMODIN
+
+select * from musicallyapp..ComprobanteFactura comprobante where ClienteNombre like '%BENG%' 
+
+---ALTERO CONTEO DE TABLAS
+SELECT
+fROM TABLA
+INNER JOIN TABLA1
+INNER JOIN TABLA2
+INNER JOIN TABLA3
+INNER JOIN TABLA4
+INNER JOIN TABLA5
+INNER JOIN TABLA6
+
+---- *
+
+select
+NumeroFactura, ImporteTotal, FechaEmision
+from musicallyapp..ComprobanteFactura
+
