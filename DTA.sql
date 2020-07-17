@@ -351,7 +351,7 @@ or Factura.IdFactura = comprobante.IdFactura
 select * from musicallyapp..ComprobanteFactura comprobante 
 where ClienteIdentificacion = '0908560212' or NumeroFactura = '001-004-000001948'
 
---eVITAR BUSQUEDAS COMODIN
+--EVITAR BUSQUEDAS COMODIN
 
 select * from musicallyapp..ComprobanteFactura comprobante where ClienteNombre like '%BENG%' 
 
