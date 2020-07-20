@@ -29,6 +29,7 @@ begin tran
 
 rollback
 
+set transaction isolation level read committed
 
 ---Show inconsistent data and no locked
 

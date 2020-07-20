@@ -1,40 +1,39 @@
 use master
 go
 
-alter database Bd_Gtisys add filegroup Bd_Gtisys_Data2
+alter database musicallyapp add filegroup musicallyapp_Data4
 
 
-alter database Bd_Gtisys
+alter database musicallyapp
 add file(
 
-	name = Bd_Gtisys1,
-	filename = 'E:\SQLdata4\Bd_Gtisys1.ndf' ,
-	size = 1MB,
-	maxsize = 200MB,
-	FILEGROWTH = 10MB
-)to filegroup Bd_Gtisys_Data2
+	name = musicallyapp4,
+	filename = 'E:\SQLdata4\musicallyapp4.ndf' ,
+	size = 5MB,
+	maxsize = 800MB,
+	FILEGROWTH = 700MB
+)to filegroup musicallyapp_Data4
 
 
 
 ----Creo una tabla
-use Bd_Gtisys
+use musicallyapp
 go
 
 create table RptHistoricoventas
 (
 	idventas int,
 	idusuario int
-)on  Bd_Gtisys_Data2 --- Por defecto se van al primary
+)on  musicallyapp_Data4 --- Por defecto se van al primary
 
 
 -----cambio el storage de la tabla
-CREATE UNIQUE CLUSTERED INDEX PK_OPER_TIPO_CURSO
-ON OPER_TIPO_CURSO(ID_TIPO_CURSO)
-WITH (DROP_EXISTING=ON,ONLINE=ON) ON Bd_Gtisys_Data2
+CREATE UNIQUE CLUSTERED INDEX PK_IdDisco
+ON Discos(IdDisco)
+WITH (DROP_EXISTING=ON,ONLINE=ON) ON musicallyapp_Data4
 
 ---CBO_CAB_COMPROBANTE
-
-CREATE UNIQUE CLUSTERED INDEX PK_CBO_COMPROBANTE
-ON CBO_CAB_COMPROBANTE(ID_CAB_COMPROBANTE)
-WITH (DROP_EXISTING=ON,ONLINE=OFF) ON Bd_Gtisys_Data2
+CREATE UNIQUE CLUSTERED INDEX PK_INV_PROVEEDOR
+ON INV_PROVEEDOR(ID_PROVEEDOR)
+WITH (DROP_EXISTING=ON,ONLINE=OFF) ON musicallyapp_Data4
 
